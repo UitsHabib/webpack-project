@@ -6,15 +6,16 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && webpack",
-    "build:prod": "NODE_ENV=production npm run clean && webpack -p",
+    "build:prod": "cross-env NODE_ENV=production npm run clean && webpack -p",
     "serve": "webpack-dev-server",
     "deploy:github": "npm run build:prod && git subtree push --prefix dist origin gh-pages",
-    "deploy:surge": "surge -p dist"
+    "deploy:surge": "npm run build:prod && surge -p dist"
   },
   "repository": "https://github.com/StephenGrider/WebpackProject",
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.1",
     "faker": "^3.1.0",
     "lodash": "^4.17.2",
     "react": "15.4.1",
@@ -32,10 +33,12 @@
     "babel-preset-env": "^1.1.4",
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.26.1",
-    "style-loader": "^0.13.1",
-    "webpack": "2.2.0-rc.0",
     "html-webpack-plugin": "^2.24.1",
     "rimraf": "^2.5.4",
-    "webpack-dev-server": "2.2.0-rc.0"
+    "style-loader": "^0.13.1",
+    "webpack": "2.2.0-rc.0",
+    "webpack-dev-middleware": "1.9.0",
+    "webpack-dev-server": "2.2.0-rc.0",
+    "cross-env": "^7.0.3"
   }
 }
